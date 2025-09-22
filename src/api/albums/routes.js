@@ -1,61 +1,70 @@
 const routes = (handler) => [
   {
-    method: 'POST',
-    path: '/albums',
+    method: "POST",
+    path: "/albums",
     handler: handler.postAlbumHandler,
   },
   {
-    method: 'GET',
-    path: '/albums',
+    method: "GET",
+    path: "/albums",
     handler: handler.getAlbumsHandler,
   },
   {
-    method: 'GET',
-    path: '/albums/{id}',
+    method: "GET",
+    path: "/albums/{id}",
     handler: handler.getAlbumByIdHandler,
   },
   {
-    method: 'PUT',
-    path: '/albums/{id}',
+    method: "PUT",
+    path: "/albums/{id}",
     handler: handler.putAlbumByIdHandler,
   },
   {
-    method: 'DELETE',
-    path: '/albums/{id}',
+    method: "DELETE",
+    path: "/albums/{id}",
     handler: handler.deleteAlbumByIdHandler,
   },
   {
-    method: 'POST',
-    path: '/albums/{id}/covers',
+    method: "POST",
+    path: "/albums/{id}/covers",
     handler: handler.postUploadCoverHandler,
     options: {
       payload: {
-        allow: 'multipart/form-data',
+        allow: "multipart/form-data",
         multipart: true,
-        output: 'stream',
+        output: "stream",
         maxBytes: 512000,
       },
     },
   },
   {
-    method: 'POST',
-    path: '/albums/{id}/likes',
-    handler: handler.postAlbumLikesHandler,
-    options: {
-      auth: 'openmusic_jwt',
+    method: "GET",
+    path: "/albums/file/covers/{param*}",
+    handler: {
+      directory: {
+        path: path.resolve(__dirname, "../uploads/file/images"),
+      },
     },
   },
   {
-    method: 'GET',
-    path: '/albums/{id}/likes',
+    method: "POST",
+    path: "/albums/{id}/likes",
+    handler: handler.postAlbumLikesHandler,
+    options: {
+      auth: "openmusic_jwt",
+    },
+  },
+  {
+    method: "GET",
+    path: "/albums/{id}/likes",
     handler: handler.getAlbumLikesHandler,
   },
   {
-    method: 'DELETE',
-    path: '/albums/{id}/likes',
+    method: "DELETE",
+    path: "/albums/{id}/likes",
     handler: handler.deleteAlbumLikesHandler,
     options: {
-      auth: 'openmusic_jwt',
+      auth: "openmusic_jwt",
     },
   },
 ];
