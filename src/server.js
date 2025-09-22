@@ -121,16 +121,6 @@ const init = async () => {
     return h.continue;
   });
 
-  server.route({
-    method: "GET",
-    path: "/upload/images/{param*}",
-    handler: {
-      directory: {
-        path: path.resolve(__dirname, "api/albums/file/covers"),
-      },
-    },
-  });
-
   await server.register([
     {
       plugin: albums,
